@@ -43,11 +43,11 @@ class TSI_Yesbycash_Model_Sales_Quote_Address_Total_Yesbycashfee extends Mage_Sa
         }
         if ($paymentMethod && $paymentMethod == 'yesbycash_standard') {
             $baseAmount = $this->_getHelper()->getYesbycashFee($address->getQuote());
-            $amount = Mage::helper('core')->currency($baseAmount, true, false);
+            $amount = Mage::helper('core')->currency($baseAmount, false, false);
             $address->setYesbycashFee($amount);
             $address->setBaseYesbycashFee($baseAmount);
         }
-
+        
         $address->setGrandTotal($address->getGrandTotal() + $tax + $address->getYesbycashFee());
         $address->setBaseGrandTotal($address->getBaseGrandTotal() + $tax + $address->getBaseYesbycashFee());
 

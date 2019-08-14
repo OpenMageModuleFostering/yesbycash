@@ -121,6 +121,7 @@ class TSI_Yesbycash_Helper_Data extends Mage_Core_Helper_Data {
             $subTotal = $address->getBaseSubtotal();
             $baseAmount = ($subTotal + $tax) * floatval($baseYesbycashFeeValue) / 100;
         }
+        
         return $baseAmount;
     }
 
