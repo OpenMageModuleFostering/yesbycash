@@ -1,0 +1,234 @@
+.ybc_map_container {
+    width: 100%;
+}
+
+.ybc_clearfix {
+    clear: both;
+}
+
+.ybc_map_header {
+    padding: 30px 25px 25px;
+    border: 1px solid #efefef;
+    text-align: center;
+}
+
+.ybc_map_header img {
+    margin: 0 auto;
+}
+
+.ybc_map_header p {
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    color: #494948;
+}
+
+#ybc_intro_content {
+    padding: 25px;
+    color: #fff;
+    background-color: #202020;
+}
+
+#ybc_intro_content i {
+    font-size: 11px;
+}
+
+.ybc_intro_txt {
+    font-size: 14px;
+}
+
+.ybc_center_txt {
+    text-align:center;
+}
+
+.ybc_intro_txt a {
+    color: #fff;
+}
+
+#part-for-ajax {
+width: 141%;
+}
+
+#ybc_outlet_fields {
+    padding: 30px 0 40px;
+    background-color: #f2f2f2;
+}
+
+#ybc_outlet_fields h4 {
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.ybc_map_fields div.ybc_form {
+    text-align: center;
+}
+
+.ybc_map_fields #ybc_map_department, .ybc_map_fields #ybc_map_country {
+    border: 0 none;
+    border-radius: 2px;
+    height: 30px;
+    margin: 0 5px 0 0;
+    padding: 0 10px;
+    width: 130px;
+}
+
+.ybc_map_fields #ybc_map_country {
+    padding: 3px;
+}
+
+.ybc_btn {
+    display: inline-block;
+    position: relative;
+    padding: 5px 7px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    line-height: 18px;
+    color: #575757;
+    background-color: #f0f0f0;
+}
+
+.ybc_btn:hover,
+.ybc_btn:active {
+    color: #fff;
+    background-color: #db4426;
+    text-decoration:none;
+}
+
+.ybc_btn.ybc_btn_submit,
+.ybc_btn.ybc_btn_submit:link,
+.ybc_btn.ybc_btn_submit:visited {
+    padding: 4px 20px;
+    border: 0 none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #db4426;
+}
+
+.ybc_btn.ybc_btn_submit:hover,
+.ybc_btn.ybc_btn_submit:active {
+    color: #fff;
+    background-color: #575757;
+    text-decoration:none;
+}
+
+.ybc_form > img {
+    display:none;
+    height: 20px;
+}
+
+.ybc_form label {
+    float:none;
+}
+
+#ybc_loader_noselect {
+    float: right;
+    height: 45px;
+    margin-right: 15px;
+    padding-top: 17px;
+    display:none;
+}
+
+.ybc_outlet_found {
+    padding: 15px 0;
+    text-align: center;
+    font-size: 19px;
+    line-height: 30px;
+    background-color: #f8f8f8;
+    margin:0;
+}
+
+.outletsList {
+    float: left;
+    width: 30%;
+    max-height: 400px;
+    border-bottom: 1px solid #efefef;
+    overflow: auto;
+}
+
+.outletsListInner {
+    border-left: 1px solid #efefef;
+}
+
+.ybc_orange {
+    color: #db4426;
+}
+
+.outletsList li {
+    padding: 20px;
+    border-bottom: 1px solid #efefef;
+    list-style-type: none;
+}
+
+.ybc_listed_outlet h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ybc_listed_outlet p,
+.ybc_listed_outlet h2,
+.ybc_listed_outlet h3 {
+    margin: 0 0 5px;
+    line-height: 17px;
+    color: #333;
+}
+
+#ybc_mapcanvas {
+    float: left;
+    width: 70%;
+    margin-bottom: 20px;
+    min-height: 400px;
+    position:relative;
+    background-color: rgb(229, 227, 223); 
+}
+
+#submitYesbycash {
+    float: right;
+    width: 170px;
+    margin-top: 5px;
+    min-height: 50px;
+    white-space: normal;
+}
+
+#ybc_no_outlet, #ybc_outlet {
+    float: right;
+    width: 220px;
+    margin-top: 5px;
+    margin-right: 7px;
+    min-height: 50px;
+    white-space: normal;
+}
+
+#ybc_outlet {
+    display:none;
+}
+
+.ybc_btn.ybc_outlet_selected {
+    color: #fff !important;
+    background-color: #db4426 !important;
+}
+#carte_YBC_wrapper {
+            width:100%;
+        }
+        #carte_YBC
+        {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #333333
+        }
+.ybc_map_fields {
+    width: 141%;
+}
+.__tsi_map__ input[type="text"] {
+    margin:0!important;
+    height:27px;
+}
+
+ .page-title.title-buttons{
+    overflow: visible;
+    position: relative;
+}

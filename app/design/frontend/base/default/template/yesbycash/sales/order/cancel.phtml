@@ -1,0 +1,7 @@
+<?php $_order = $this->getOrder() ?>
+<?php if ($this->showButton()): ?>
+    <button onclick="window.location = '<?php echo $this->getCancelUrl($_order); ?>';" class="button" title="Annuler la commande YesByCash" type="button" style="right:0;position: absolute;top:30px; margin-bottom:15px">
+        <span><span>Annuler la commande YesByCash</span></span>
+    </button>
+    <span class="clearfix"></span>
+<?php endif; ?>

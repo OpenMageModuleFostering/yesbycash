@@ -1,0 +1,10 @@
+<?php if (strpos($this->getPayment(), 'yesbycash') !== false): ?>
+    <br /><br />
+    <?php echo $this->__("La commande s'est bien déroulée."); ?>
+    <br /><br />
+    <?php echo $this->__("Vous allez recevoir par email le récapitulatif de votre commande YesByCash avec le code barre en pièce jointe à présenter dans le point de paiement."); ?>
+    <br /><br />
+    <?php echo $this->__("Vous pouvez désormais vous rendre au point de paiement choisi pour régler votre commande."); ?> <?php echo Mage::helper('tsi_yesbycash')->getBaseGrandTotal(); ?>
+    <br /><br />
+    <?php echo $this->__("Vous avez la possibilité de payer votre commande dans les points de vente accessibles sur :"); ?> <a href="http://www.yesbycash.com" target="_blank">www.yesbycash.com</a> <?php echo $this->__('rubrique "points de paiement".'); ?>
+<?php endif; ?>

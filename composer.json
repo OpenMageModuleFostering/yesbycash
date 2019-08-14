@@ -1,0 +1,18 @@
+{
+    "name": "OpenMageModuleFostering/YesByCash",
+    "type": "magento-module",
+    "license": "Open-Software-License",
+    "homepage": "",
+    "description": "Unique solution de paiement web-to-store permettant aux e-commerçants de réduire leur taux d’abandon de panier
+
+Les clients remplissent leur panier d’achat sur votre site et se rendent en point de paiement, pour régler en espèces leurs commandes.",
+    "authors": [
+    {
+        "name": "TSI",
+        "email": "support@tsi-payment.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

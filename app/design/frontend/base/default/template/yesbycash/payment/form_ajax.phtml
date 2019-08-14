@@ -1,0 +1,56 @@
+<?php $_outlets = $this->getOutlets(); ?>
+<?php $_outletsNbr = count($_outlets); ?>
+<?php if ($_outletsNbr == 0): ?>
+    <h3 class="ybc_outlet_found">
+        <?php echo $this->__('Nous avons trouvé '); ?>
+        <b class="ybc_orange">0</b> 
+        <?php echo $this->__('point de paiement <br />correspondant au code postal'); ?> <?php echo $this->getPostcode(); ?>
+    </h3>
+<?php else: ?>
+    <h3 class="ybc_outlet_found">
+        <?php echo $this->__('Nous avons trouvé '); ?>
+        <b class="ybc_orange"><?php echo $_outletsNbr; ?></b> 
+        <?php echo ($_outletsNbr > 1) ? $this->__('points') : $this->__('point'); ?>  <?php echo $this->__('de paiement'); ?> <br />
+        <?php echo $this->__('correspondant au code postal'); ?> <?php echo $this->getPostcode(); ?>
+    </h3>
+    <div class="outletsList">
+        <div class="outletsListInner">
+            <ul>
+                <?php foreach ($_outlets as $_outlet): ?>
+                    <li id="ybc_<?php echo $_outlet->outletsid; ?>" class="ybc_listed_outlet">
+                        <h2><?php echo $_outlet->outletsname; ?></h2>
+                        <h3><?php echo $_outlet->outletszipcode . ' ' . $_outlet->outletscity; ?></h3>
+                        <p><?php echo $_outlet->outletsaddress; ?></p>
+                        <p><?php echo $_outlet->outletsphone; ?></p>
+                        <a id="btn_<?php echo $_outlet->outletsid; ?>" class="ybc_btn ybc_outlet_btn" href="#">Sélectionner ce point de paiement</a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <div id="carte_YBC_wrapper"><div id="carte_YBC"></div></div>
+    <input id="ybc_outlet_selecta" type="hidden" value="" name="ybc_outlet_selecta">
+    <div>
+        <button type="button" onclick="yesbycash.handleNoOutletSelection()" id="ybc_no_outlet" name="ybc_no_outlet" class="ybc_btn ybc_btn_submit"><?php echo $this->__('Je choisirai ultérieurement un autre point de paiement'); ?></button>
+        <button type="button" onclick="yesbycash.OutletSelection()" id="ybc_outlet" name="ybc_outlet" class="ybc_btn ybc_btn_submit"><?php echo $this->__('Je choisis ce point de paiement'); ?></button>
+        <img id="ybc_loader_noselect" src="<?php echo $this->getSkinUrl('images/yesbycash/ybc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Veuillez patienter'); ?>" title="<?php echo $this->__('Veuillez patienter'); ?>"/>
+    </div>
+    <div class="ybc_clearfix"></div>
+    <script type="text/javascript">
+        //<![CDATA[
+    <?php foreach ($_outlets as $key => $_outlet): ?>
+            yesbycash.tabOutlets[<?php echo $key; ?>] = new Array(
+                    "<?php echo $_outlet->outletsname; ?>",
+                    "<?php echo $_outlet->outletsaddress; ?>",
+                    "<?php echo $_outlet->outletsphone; ?>",
+                    "<?php echo $_outlet->outletszipcode . ' ' . $_outlet->outletscity; ?>",
+                    "<?php echo $_outlet->outletslatitude; ?>",
+                    "<?php echo $_outlet->outletslongitude; ?>");
+    <?php endforeach; ?>
+        yesbycash.setMap();
+        $('carte_YBC_wrapper').setStyle({width: '70%'});
+        $('carte_YBC_wrapper').setStyle({float: 'left'});
+        $('carte_YBC').setStyle({height: '400px'});
+        //]]>
+    </script>
+<?php endif; ?>

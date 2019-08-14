@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/yesbycash/yesbycash.css</name>
+            </action>
+        </reference>
+    </default>
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/yesbycash/yesbycash.js</name>
+            </action>
+            <block type="core/text" name="yesbycash.loader.js" before="-">
+                <action method="setText">
+                    <text>
+           <![CDATA[<script type="text/javascript" id="tsi_map_ybc_loader" src="//www.yesbycash.com/api/merchant_map/loader.js"></script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_success translate="label"> 
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/yesbycash/yesbycash.js</name>
+            </action>
+        </reference>
+        <reference name="checkout.success">
+            <block type="tsi_yesbycash/onepage_success" name="checkout.success.yesbycash" template="yesbycash/checkout/success.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+    <checkout_onepage_failure translate="label">
+        <reference name="checkout.success">
+            <block type="tsi_yesbycash/onepage_failure" name="checkout.failure.yesbycash" template="yesbycash/checkout/failure.phtml"/>
+        </reference>
+    </checkout_onepage_failure>
+    <sales_order_view>
+        <reference name="sales.order.info.buttons">
+            <block type="tsi_yesbycash/sales_order_cancel" name="order.cancel.yesbycash" as="order_cancel_yesbycash" after="-" template="yesbycash/sales/order/cancel.phtml" />
+        </reference>
+    </sales_order_view>
+</layout>

@@ -1,0 +1,137 @@
+<?php $_code = $this->getMethodCode() ?>
+<?php $_allowedCountrys = $this->getAllowedCountrys(); ?>
+<?php $_postcode = $this->getPostcode(); ?>
+<?php $_countryId = $this->getCountryId(); ?>
+<?php $_outlets = $this->getOutlets(); ?>
+<?php $_outletsNbr = count($_outlets); ?>
+<?php $_ybcFee = $this->getYesbycashFee(); ?>
+<?php if ($_ybcFee): ?>
+    <p><small><?php echo $this->__('- Frais de service Yesbycash :'); ?> <b><?php echo $this->getYesbycashFee(); ?></b></small></p>
+<?php endif; ?>
+<div class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <div class="ybc_map_container">
+        <div class="ybc_map_header"> 
+            <img width="168" height="68" src="<?php echo $this->getSkinUrl('images/yesbycash/yesbycash_logo.png') ?>" alt="Logo Yes by Cash">
+            <p><?php echo $this->__('Le paiement en cash sur internet'); ?></p>
+        </div>
+        <div class="ybc_map_fields">
+            <div id="ybc_intro_content">
+                <p class="ybc_intro_txt"> 
+                    <?php echo $this->__('Vous avez la possibilité de <b>payer votre commande</b> dans les points de vente accessibles sur :'); ?> 
+                    <b>
+                        <a target="_blank" href="http://www.yesbycash.com">www.yesbycash.com</a>
+                    </b> 
+                    rubrique "points de paiement". 
+                    <br /> 
+                    <?php echo $this->__('Cependant, nous vous recommandons de vous assurer au préalable qu\'un point de paiement est disponible dans la ville de votre choix.'); ?>
+                </p>
+                <p>
+                    <i><?php echo $this->__('Il vous sera toujours possible de régler votre commande dans un autre point de paiement YesByCash'); ?></i>
+                </p>
+            </div>
+            <div id="ybc_outlet_fields">
+                <h4 class="ybc_center_txt"><?php echo $this->__('Je sélectionne un point de paiement :'); ?></h4>
+                <div class="ybc_form">
+                    <label for="ybc_map_department"><?php echo $this->__('Code postal'); ?> :</label> 
+                    <input type="text" value="<?php echo $_postcode; ?>" id="ybc_map_department" class="ybc_input">
+                    <select name="ybc_map_country" id="ybc_map_country">
+                        <option value="<?php echo $_countryId; ?>"><?php echo $_allowedCountrys[$_countryId]; ?></option>
+                        <?php
+                        unset($_allowedCountrys[$_countryId]);
+                        foreach ($_allowedCountrys as $countryId => $countryName):
+                            ?>
+                            <option value="<?php echo $countryId; ?>"><?php echo $countryName; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="button" onclick="yesbycash.clickForMap()" id="ybc_map_submit" name="ybc_map_submit" class="ybc_btn ybc_btn_submit ybc_input"><?php echo $this->__('Rechercher'); ?></button>
+                    <img id="ybc_loader_search" src="<?php echo $this->getSkinUrl('images/yesbycash/ybc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Veuillez patienter'); ?>" title="<?php echo $this->__('Veuillez patienter'); ?>"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="part-for-ajax">
+        <?php if ($_outletsNbr == 0): ?>
+            <h3 class="ybc_outlet_found">
+                <?php echo $this->__('Nous avons trouvé '); ?>
+                <b class="ybc_orange">0</b> 
+                <?php echo $this->__('point de paiement <br />correspondant au code postal'); ?> <?php echo $this->getPostcode(); ?>
+            </h3>
+        <?php else: ?>
+            <h3 class="ybc_outlet_found">
+                <?php echo $this->__('Nous avons trouvé '); ?>
+                <b class="ybc_orange"><?php echo $_outletsNbr; ?></b> 
+                <?php echo ($_outletsNbr > 1) ? $this->__('points') : $this->__('point'); ?>  <?php echo $this->__('de paiement'); ?> <br />
+                <?php echo $this->__('correspondant au code postal'); ?> <?php echo $this->getPostcode(); ?>
+            </h3>
+            <div class="outletsList">
+                <div class="outletsListInner">
+                    <ul>
+                        <?php foreach ($_outlets as $_outlet): ?>
+                            <li id="ybc_<?php echo $_outlet->outletsid; ?>" class="ybc_listed_outlet">
+                                <h2><?php echo $_outlet->outletsname; ?></h2>
+                                <h3><?php echo $_outlet->outletszipcode . ' ' . $_outlet->outletscity; ?></h3>
+                                <p><?php echo $_outlet->outletsaddress; ?></p>
+                                <p><?php echo $_outlet->outletsphone; ?></p>
+                                <a id="btn_<?php echo $_outlet->outletsid; ?>" class="ybc_btn ybc_outlet_btn" href="#">Sélectionner ce point de paiement</a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+            <div id="carte_YBC_wrapper"><div id="carte_YBC"></div></div>
+            <input id="ybc_outlet_selecta" type="hidden" value="" name="ybc_outlet_selecta">
+            <div>
+                <button type="button" onclick="yesbycash.handleNoOutletSelection()" id="ybc_no_outlet" name="ybc_no_outlet" class="ybc_btn ybc_btn_submit"><?php echo $this->__('Je choisirai ultérieurement un autre point de paiement'); ?></button>
+                <button type="button" onclick="yesbycash.OutletSelection()" id="ybc_outlet" name="ybc_outlet" class="ybc_btn ybc_btn_submit"><?php echo $this->__('Je choisis ce point de paiement'); ?></button>
+                <img id="ybc_loader_noselect" src="<?php echo $this->getSkinUrl('images/yesbycash/ybc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Veuillez patienter'); ?>" title="<?php echo $this->__('Veuillez patienter'); ?>"/>
+            </div>
+            <div class="ybc_clearfix"></div>
+        <?php endif; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    yesbycash.url = '<?php echo Mage::getBaseUrl(); ?>tsi_yesbycash/ajax/outlets/';
+    yesbycash.selectaTxtOn = "<?php echo $this->__('Point de paiement selectionné'); ?>";
+    yesbycash.selectaTxtOff = "<?php echo $this->__('Je sélectionne un point de paiement'); ?>";
+<?php foreach ($_outlets as $key => $_outlet): ?>
+        yesbycash.tabOutlets[<?php echo $key; ?>] = new Array(
+                "<?php echo $_outlet->outletsname; ?>",
+                "<?php echo $_outlet->outletsaddress; ?>",
+                "<?php echo $_outlet->outletsphone; ?>",
+                "<?php echo $_outlet->outletszipcode . ' ' . $_outlet->outletscity; ?>",
+                "<?php echo $_outlet->outletslatitude; ?>",
+                "<?php echo $_outlet->outletslongitude; ?>");
+<?php endforeach; ?>
+    //<![CDATA[
+    $$('.radio[name^=payment]').each(function (e) {
+        if ($(e).checked)
+        {
+            if ($(e).id === 'p_method_yesbycash_standard') {
+                $('p_method_yesbycash_standard').click();
+                yesbycash.bindMap(<?php echo $this->getPostcode() ?>);
+            }
+        }
+    });
+    $('co-payment-form').on('change', '.radio', function (event) {
+        if (event.target.id === 'p_method_yesbycash_standard') {
+            yesbycash.bindMap(<?php echo $this->getPostcode() ?>);
+        }
+    });
+    $$('.step-title a').each(function (e) {
+        Event.observe(e, 'click', function () {
+            $('ybc_loader_noselect').hide();
+        });
+    });
+    $$('#carte_YBC button').each(function (e) {
+        Event.observe(e, 'click', function (b) {
+            b.preventDefault();
+        });
+    });
+    $$('.step-title a').each(function (e) {
+        Event.observe(e, 'click', function () {
+            $('ybc_loader_noselect').hide();
+        });
+    });
+    //]]>
+</script>
